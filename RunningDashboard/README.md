@@ -1,4 +1,4 @@
-# GarminDashboard
+# RunningDashboard
 
 A SwiftUI iOS app that displays running statistics by reading workout data synchronized to **Apple HealthKit** (compatible with Garmin Connect, Apple Fitness, Strava, etc.).
 
@@ -18,9 +18,9 @@ A SwiftUI iOS app that displays running statistics by reading workout data synch
 
 | Requirement | Version |
 |---|---|
-| iOS | 16.0+ |
-| Xcode | 14.0+ |
-| Swift | 5.7+ |
+| iOS | 26.2+ |
+| Xcode | 26.0+ |
+| Swift | 6.0+ |
 | Frameworks | SwiftUI, HealthKit, Swift Charts |
 
 > **Note:** This app runs on a **physical device only**. HealthKit is not available in the iOS Simulator.
@@ -28,12 +28,14 @@ A SwiftUI iOS app that displays running statistics by reading workout data synch
 ## Project Structure
 
 ```
-GarminDashboard/
+RunningDashboard/
+├── RunningDashboardApp.swift   # App entry point
 ├── HealthKitManager.swift      # HealthKit data layer (authorization, queries)
 ├── DashboardViewModel.swift    # Business logic & state (@ObservableObject)
 ├── DashboardView.swift         # Main screen
 ├── MonthlyActivityChart.swift  # Bar chart component (Swift Charts)
-└── StatCard.swift              # Reusable stat card component
+├── StatCard.swift              # Reusable stat card component
+└── ContentView.swift           # Default SwiftUI template (unused)
 ```
 
 ### Architecture — MVVM
@@ -56,17 +58,22 @@ HealthKitManager  ──►  DashboardViewModel  ──►  DashboardView
 
 The app requests **read-only** access to workout data (`HKWorkoutType`). No data is written to HealthKit.
 
-Add the following key to your `Info.plist`:
+The following keys are configured in the project build settings (`Info.plist` auto-generated):
 
-```xml
-<key>NSHealthShareUsageDescription</key>
-<string>This app reads your running workouts to display distance statistics.</string>
 ```
+NSHealthShareUsageDescription — read access to workout data
+NSHealthUpdateUsageDescription — declared but not used (no writes)
+```
+
+The `com.apple.developer.healthkit` entitlement is enabled in `RunningDashboard.entitlements`.
 
 ## Getting Started
 
-1. Clone the repository
-2. Open the project in **Xcode 14+**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jclabaut/RunningDashboard.git
+   ```
+2. Open `RunningDashboard.xcodeproj` in **Xcode 26+**
 3. Select a physical iOS device as the build target
 4. Build & run (`⌘R`)
 5. Grant HealthKit access when prompted
