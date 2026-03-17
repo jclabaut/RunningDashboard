@@ -17,7 +17,7 @@ struct MonthlyActivityChart: View {
                     .frame(height: 200)
                     .frame(maxWidth: .infinity)
                     .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
             } else {
                 Chart {
                     ForEach(data, id: \.date) { item in
@@ -37,7 +37,7 @@ struct MonthlyActivityChart: View {
                     AxisMarks(values: .stride(by: .month)) { value in
                         AxisGridLine()
                         AxisTick()
-                        if let date = value.as(Date.self) {
+                        if value.as(Date.self) != nil {
                             AxisValueLabel(format: .dateTime.month(.abbreviated))
                         }
                     }
@@ -46,7 +46,7 @@ struct MonthlyActivityChart: View {
         }
         .padding()
         .background(Color.gray.opacity(0.05))
-        .cornerRadius(16)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
         .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
     }
 }

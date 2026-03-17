@@ -64,8 +64,8 @@ struct DashboardView: View {
                             DatePicker("Start Date", selection: $viewModel.selectedCustomStartDate, displayedComponents: .date)
                             DatePicker("End Date", selection: $viewModel.selectedCustomEndDate, displayedComponents: .date)
                         }
-                        .onChange(of: viewModel.selectedCustomStartDate) { _ in viewModel.updateCustomRangeStats() }
-                        .onChange(of: viewModel.selectedCustomEndDate) { _ in viewModel.updateCustomRangeStats() }
+                        .onChange(of: viewModel.selectedCustomStartDate) { viewModel.updateCustomRangeStats() }
+                        .onChange(of: viewModel.selectedCustomEndDate) { viewModel.updateCustomRangeStats() }
                         
                         Divider()
                         
@@ -81,7 +81,7 @@ struct DashboardView: View {
                     }
                     .padding()
                     .background(Color.gray.opacity(0.1))
-                    .cornerRadius(12)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                     .padding(.horizontal)
                     
                 }
