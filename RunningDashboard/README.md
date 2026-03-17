@@ -4,7 +4,7 @@ A SwiftUI iOS app that displays running statistics by reading workout data synch
 
 ## Screenshots
 
-> _Add your screenshots here_
+![Screenshot](screenshot.png)
 
 ## Features
 
